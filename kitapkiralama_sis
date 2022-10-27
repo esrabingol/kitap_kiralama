@@ -1,0 +1,100 @@
+#include<iostream>
+using namespace std;
+class uye
+{
+char isim;
+int alinangun;
+public:
+virtual void yaz()=0;
+virtual void hesapla()=0;
+};
+class ogrenci:public uye
+{
+char isim;
+int ogrencino,alinangun;
+public:
+ogrenci(char i,int o,int a) :isim(i),ogrencino(o),alinangun(a) {}
+void yaz();
+void hesapla();
+};
+void ogrenci::yaz()
+{
+cout<<"isim :"<<isim<<endl;
+cout<<" alinan gun :";
+cin>>alinangun;
+cout<<" ogrenci no :";
+cin>>ogrencino;
+}
+void ogrenci::hesapla()
+{
+int bugununtarihi;
+cout<<"bugunun tarihini giriniz :";
+cin>>bugununtarihi;
+if(bugununtarihi>alinangun)
+{
+int toplam=(bugununtarihi-alinangun)*2;
+cout<<toplam<<" tl odemeniz var "<<endl;
+}
+else 
+{
+cout<<"Kitabi sadece 3 gunlugune odunc alabilirsiniz.. lutfen zamanindan once teslim 
+edin..."<<endl;
+}
+}
+class ogretmen :public uye
+{
+int personalno,alinangun;
+char isim;
+public:
+ogretmen(char i,int a,int p) : isim(i),alinangun(a), personalno(p) {}
+void yaz();
+void hesapla();
+};
+void ogretmen::yaz()
+{
+cout<<"isim :"<<isim<<endl;
+cout<<"alinan gun :";
+cin>>alinangun;
+cout<<"personal no :";
+cin>>personalno;
+}
+void ogretmen::hesapla()
+{
+int bugununtarihi;
+cout<<"bugunun tarihini giriniz :";
+cin>>bugununtarihi;
+if(bugununtarihi>alinangun)
+{
+int toplam=(bugununtarihi-alinangun)*1;
+cout<<toplam<<" TL odemeniz var "<<endl;
+}
+else
+{
+cout<<"kitabi sadece 5 gunlugune odunc alabilirsiniz.. lutfen zamanindan once teslim 
+edin.."<<endl;
+}
+}
+int main()
+{
+uye *uye[2];
+char isim;
+int alinangun,ogrencino,personalno;
+for (int i=0;i<2;i++)
+{
+cout<<"ogretmen misiniz(X) -ogrenci mi(Y)?";
+cin>>isim;
+if (isim=='Y')
+{
+uye[i] = new ogrenci(isim,alinangun,ogrencino);
+uye[i]->yaz();
+uye[i]->hesapla();
+}
+else
+{
+uye[i]= new ogretmen(isim,alinangun,personalno);
+uye[i]->yaz();
+uye[i]->hesapla();
+}
+}
+return 0;
+}
